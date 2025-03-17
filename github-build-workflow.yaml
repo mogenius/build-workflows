@@ -11,7 +11,6 @@ env:
 jobs:
   build-image:
     runs-on: ubuntu-latest
-    environment: MOGENIUS_ENVIRONMENT
 
     permissions:
       contents: read
@@ -58,7 +57,8 @@ jobs:
           docker push ${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}
           docker push ${{ vars.MO_IMAGE_NAME }}:latest
 
-      - name: Release with mogenius
+      - id: releaseWithMogenius
+        name: Release with mogenius
         uses: mogenius/mogenius-release-action@v1
         with:
           dev: true
@@ -68,4 +68,4 @@ jobs:
           resourceName: ${{ vars.MO_RESOURCE_NAME }}
           containerName: ${{ vars.MO_CONTAINER_NAME }}
           apiKind: ${{ vars.MO_API_KIND }}
-          token: ${{ secrets.MO_MOGENIUS_TOKEN }}
+          token: ${{ secrets.MO_API_TOKEN }}
