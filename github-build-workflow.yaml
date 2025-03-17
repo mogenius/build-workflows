@@ -67,5 +67,5 @@ jobs:
           namespace: ${{ vars.MO_NAMESPACE_NAME }}
           resourceName: ${{ vars.MO_RESOURCE_NAME }}
           containerName: ${{ vars.MO_CONTAINER_NAME }}
-          apiKind: ${{ vars.MO_API_KIND }}
+          keyKind: ${{ vars.MO_API_KIND }}
           token: ${{ secrets.MO_API_TOKEN }}
