@@ -61,7 +61,7 @@ jobs:
         name: Release with mogenius
         uses: mogenius/mogenius-release-action@v1
         with:
-          dev: true
+          dev: false
           image: "${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}"
           kind: ${{ vars.MO_KIND }}
           namespace: ${{ vars.MO_NAMESPACE_NAME }}
