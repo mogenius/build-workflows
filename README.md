@@ -1,1 +1,27 @@
 # build-workflows
+
+
+
+## .releaserc
+
+
+    {
+    "branches": [
+        "main",
+        {
+        "name": "develop",
+        "prerelease": true
+        }
+    ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        [
+        "@semantic-release/github",
+        {
+            "successComment": false,
+            "failTitle": false
+        }
+        ],
+        "@semantic-release/release-notes-generator"
+    ]
+    }
