@@ -4,13 +4,13 @@ This repository offers a collection of GitHub Actions workflows tailored for sea
 
 ## 📦 Overview
 
-Mogenius simplifies the deployment of containerized applications by providing a cloud-agnostic platform that integrates effortlessly with your existing infrastructure.  
+mogenius simplifies the deployment of containerized applications to Kubernetes by providing a cloud-agnostic platform that integrates effortlessly with your existing infrastructure.  
 By leveraging these workflows, you can automate the build and deployment processes, ensuring consistent and efficient application delivery.
 
 ## ⚙️ Features
 
 - **Automated Docker Builds**: Trigger Docker image builds upon commits to specified branches.
-- **Continuous Deployment**: Automatically deploy updated images to your Kubernetes clusters managed by mogenius.
+- **Continuous Deployment**: Automatically deploy updated images to your Kubernetes clusters with the mogenius operator.
 - **Customizable Workflows**: Adapt the provided workflows to fit your project's specific needs.
 - **Integration with Git Platforms**: Seamlessly connect with GitHub, GitLab, or Bitbucket repositories.
 
@@ -18,11 +18,24 @@ By leveraging these workflows, you can automate the build and deployment process
 
 ### Prerequisites
 
-- A [mogenius](https://mogenius.com) account with an integrated Kubernetes cluster.
+- A [mogenius](https://mogenius.com) account with a connected Kubernetes cluster (read the [quickstart guide](https://docs.mogenius.com/overview/quickstart)).
 - A Git repository (GitHub, GitLab, or Bitbucket) containing your application code.
 - A valid `Dockerfile` located at the root or specified path of your repository.
 
-### Setup Instructions
+### Using the mogenius pipeline starter
+
+mogenius has a built-in Github integration that allows you to deploy this workflow as a pipeline starter from your mogenius account. This is highly useful for the first deployment of your application, providing you with an automated workflow that you can customize afterwards.
+
+1. In your mogenius workspace, add a new resource from the dashboard and select **pipeline starter**.
+2. Set up the Github integration and select the repository where the build workflow should be deployed. You'll also add container registry credentials and create a workspace API key for the deployment.
+3. Create the application. The build workflow will be cloned and pushed to your selected repository. At the same time, a deployment is created on your Kubernetes cluster, referencing the image from your build pipeline.
+4. The final step of your build workflow was automatically configured with your workspace API key and the metadata of your Kubernetes deployment. This way, after a successful workflow run the image on Kubernetes will be updated automatically by the mogenius operator.
+
+Here's a [detailed guide](https://docs.mogenius.com/deploying-applications/pipeline-starters) on the mogenius pipeline starter.
+
+### Manual setup
+
+The steps performed by the mogenius pipeline starter can also be done manually if you want to modify the build workflow before the initial deployment.
 
 1. **Clone the Repository**:
 
@@ -56,25 +69,29 @@ By leveraging these workflows, you can automate the build and deployment process
    git push origin main
    ```
 
-6. **Configure mogenius**:
+6. **Configure the Kubernetes deployment in mogenius**:
 
-   In your mogenius dashboard, set up the service to connect with your repository and specify the branch to monitor for changes.
+1. In your mogenius workspace, add a new resource on the dashboard and select **pipeline starter**.
+2. Set up the Github integration and select the repository with your build workflow. You'll also add container registry credentials and create a workspace API key for the deployment.
+3. Create the application. This will add a new deployment to your Kubernetes cluster with the image from your build workflow.
+4. mogenius will automatically update the final step in your build workflow, adding your workspace API key and the metadata of your Kubernetes deployment. This way, after a successful workflow run the image on Kubernetes will be updated automatically by the mogenius operator.
+
 
 ## 🧩 Workflow Details
 
 The provided workflow performs the following steps:
 
-- **Checkout Code**: Retrieves the latest code from the specified branch.
+- **Check out Code**: Retrieves the latest code from the specified branch.
 - **Set Up Docker**: Prepares the environment for Docker operations.
 - **Build Image**: Constructs the Docker image using the provided `Dockerfile`.
-- **Push to Registry**: Uploads the built image to the container registry associated with your mogenius account.
-- **Trigger Deployment**: Initiates the deployment process on your Kubernetes cluster via mogenius.
+- **Push to Registry**: Uploads the built image to the container registry that you specified in mogenius.
+- **Trigger Deployment**: Initiates the deployment to your Kubernetes cluster via mogenius operator.
 
 ## 📚 Additional Resources
 
-- **[Mogenius Documentation](https://docs.mogenius.com/)**
-- **[CI/CD Pipeline Overview](https://docs.mogenius.com/development/cicd-pipeline)**
-- **[Deploying Applications](https://docs.mogenius.com/deploying-applications)**
+- **[mogenius Documentation](https://docs.mogenius.com/)**
+- **[Quickstart guide](https://docs.mogenius.com/overview/quickstart)**
+- **[mogenius Pipeline Starter](https://docs.mogenius.com/deploying-applications/pipeline-starters)**
 
 ## 🤝 Contributing
 
