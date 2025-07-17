@@ -52,6 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push amd64 image
+        id: buildAndPushImage
         uses: docker/build-push-action@v5
         with:
           context: ${{ vars.MO_DOCKERCONTEXT }}
