@@ -1,5 +1,5 @@
 name: Build, Package, Release
-description: Build and release a Docker image for amd64 architecture without semantic release.
+description: Build and release a Docker image for AMD64 architecture without semantic release.
 on:
   release:
     types:
@@ -32,7 +32,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           
       - name: Get last commit hash
-        id: lasthash
+        id: lastHash
         run: |
           LAST_HASH=$(git rev-parse --short HEAD)
           echo "LAST_HASH=$LAST_HASH" >> $GITHUB_ENV

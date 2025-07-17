@@ -37,7 +37,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           
       - name: Get last commit hash
-        id: lasthash
+        id: lastHash
         run: |
           LAST_HASH=$(git rev-parse --short HEAD)
           echo "LAST_HASH=$LAST_HASH" >> $GITHUB_ENV
