@@ -1,4 +1,5 @@
 name: Build, Package, Release
+description: Build and release a Docker image for multi-architecture (amd64/arm64) with semantic release.
 on:
   release:
     types:
