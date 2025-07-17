@@ -65,9 +65,9 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: |
-            ${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}
-            ${{ vars.MO_IMAGE_NAME }}:latest
-            ${{ vars.MO_IMAGE_NAME }}:${{ env.LAST_HASH }}
+            ${{ vars.MO_REGISTRY_URL }}/${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ vars.MO_REGISTRY_URL }}/${{ vars.MO_IMAGE_NAME }}:latest
+            ${{ vars.MO_REGISTRY_URL }}/${{ vars.MO_IMAGE_NAME }}:${{ env.LAST_HASH }}
           build-args: |
             VERSION=${{ env.VERSION }}
 
@@ -76,7 +76,7 @@ jobs:
         uses: mogenius/mogenius-release-action@v1
         with:
           dev: true
-          image: ${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}
+          image: ${{ vars.MO_REGISTRY_URL }}/${{ vars.MO_IMAGE_NAME }}:${{ env.VERSION }}
           kind: ${{ vars.MO_KIND }}
           namespace: ${{ vars.MO_NAMESPACE_NAME }}
           resourceName: ${{ vars.MO_RESOURCE_NAME }}
