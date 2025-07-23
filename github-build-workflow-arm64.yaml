@@ -8,7 +8,7 @@ on:
     branches:
       - main
 env:
-  VERSION: null
+  VERSION: 0.0.1
 jobs:
 
   build-image:
@@ -47,7 +47,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ vars.MO_REGISTRY_AUTH_URL }}
-          username: ${{ vars.MO_REGISTRY_USER }}
+          username: ${{ secrets.MO_REGISTRY_USER }}
           password: ${{ secrets.MO_REGISTRY_PAT }}
 
       - name: Set up QEMU
